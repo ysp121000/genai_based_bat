@@ -1,6 +1,4 @@
 import streamlit as st
-from langchain.document_loaders import PyMuPDFLoader
-from langchain.text_splitter import CharacterTextSplitter
 
 st.title("🎈 My new app")
 st.write(
@@ -9,9 +7,11 @@ st.write(
 file=st.file_uploader('Pick a file')
 
 if file is not None:
+    from langchain.document_loaders import PyMuPDFLoader
     loader = PyMuPDFLoader(file)
     documents = loader.load()
 
+    from langchain.text_splitter import CharacterTextSplitter
     text_splitter = CharacterTextSplitter(
         chunk_size=2000,
         chunk_overlap=500
